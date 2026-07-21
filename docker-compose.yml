@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_db:/app/db_data
+    environment:
+      - DATABASE_URL=sqlite:////app/db_data/interceptor.db
+      - RULE_WEIGHT=0.4
+      - LLM_WEIGHT=0.6
+      - ALERT_THRESHOLD=75.0
+      - DEFAULT_LLM_PROVIDER=fallback
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_WS_URL=ws://localhost:8000
+    restart: always
+
+volumes:
+  backend_db:
