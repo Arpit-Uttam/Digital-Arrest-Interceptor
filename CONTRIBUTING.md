@@ -6,15 +6,15 @@ Welcome to the team! This repository is built and maintained by a collaborative 
 
 ## 👥 Our Team & Roles
 
-1. **Alice (Backend & Database Engineer)**
+1. **Avani Katiyar (Backend & Database Engineer)**
    - Responsible for api route organization, database connection pooling, SQLite transactions, schemas, and security.
    - Core files: `/backend/app/api/`, `/backend/app/db/`, `/backend/main.py`.
 
-2. **Bob (Machine Learning & Testing Infrastructure)**
+2. **Arpit Uttam (Machine Learning & Testing Infrastructure)**
    - Responsible for speech recognition, deepfake classifiers, rule & semantic analysis fusion models, and testing suites.
    - Core files: `/backend/app/services/`, `/backend/tests/`.
 
-3. **Charlie (Frontend & UI/UX Engineer)**
+3. **Gagan gupta (Frontend & UI/UX Engineer)**
    - Responsible for the React UI, dashboard modules, custom React hooks, WebSockets client, and animations.
    - Core files: `/frontend/src/`.
 
@@ -38,9 +38,9 @@ Welcome to the team! This repository is built and maintained by a collaborative 
 
 We use feature branching. No developer pushes directly to `main`.
 1. **Branch Naming Conventions:**
-   - `feature/alice/add-database-pooling`
-   - `feature/bob/integrate-whisper-v3`
-   - `feature/charlie/enhance-risk-gauge`
+   - `feature/avani/add-database-pooling`
+   - `feature/arpit/integrate-whisper-v3`
+   - `feature/gagan/enhance-risk-gauge`
    - `bugfix/issue-description`
 2. **Conventional Commits:** Follow the conventional commits pattern:
    - `feat: add real-time deepfake classification`

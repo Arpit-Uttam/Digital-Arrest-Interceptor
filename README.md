@@ -7,21 +7,21 @@ A real-time, on-device companion-app concept that analyzes call transcripts to d
 ## 👥 Meet the Team & Architecture
 
 This project was built collaboratively by a team of three developers:
-- **Alice (Backend & Database):** Re-architected the database models, isolated schemas, and developed the FastAPI route/session routers.
-- **Bob (ML, DSP & Quality Assurance):** Created the transcription pipelines, audio deepfake Wav2Vec2 inference, fusion scoring model, and the `pytest` suite.
-- **Charlie (Frontend & UX):** Designed the React dashboard/simulator UI, extracted websocket streaming into custom React hooks, and organized the asset directory.
+- **Avani Katiyar (Backend & Database):** Re-architected the database models, isolated schemas, and developed the FastAPI route/session routers.
+- **Arpit Uttam (ML, DSP & Quality Assurance):** Created the transcription pipelines, audio deepfake Wav2Vec2 inference, fusion scoring model, and the `pytest` suite.
+- **Gagan gupta (Frontend & UX):** Designed the React dashboard/simulator UI, extracted websocket streaming into custom React hooks, and organized the asset directory.
 
 ### 🏛️ System Architecture
 
 ```mermaid
 graph TD
-    subgraph Frontend [React Application - Charlie]
+    subgraph Frontend [React Application - Gagan gupta]
         UI[Call Simulator Dashboard]
         WS_Client[useWebSocket Hook]
         UI --> WS_Client
     end
 
-    subgraph Backend [FastAPI Application - Alice]
+    subgraph Backend [FastAPI Application - Avani Katiyar]
         Router[API Route Orchestrator]
         Session_Mgr[Database Session Manager]
         WS_Server[WebSocket Manager]
@@ -30,7 +30,7 @@ graph TD
         WS_Server --> Router
     end
 
-    subgraph ML_Services [Speech & Classification Services - Bob]
+    subgraph ML_Services [Speech & Classification Services - Arpit Uttam]
         STT[Whisper & SpeechRecognition Service]
         DF_Classifier[Wav2Vec2 Deepfake Detector]
         LLM_Scorer[Claude / GPT Semantic Scorer]
