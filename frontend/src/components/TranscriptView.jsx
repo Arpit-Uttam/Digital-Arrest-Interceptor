@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { MessageSquare, RefreshCw } from 'lucide-react'
+import { MessageSquare, Terminal, Skull, UserCheck, Eye } from 'lucide-react'
 
 const LOCAL_HIGHLIGHT_KEYWORDS = [
   "cbi", "central bureau of investigation", "ed", "enforcement directorate",
@@ -50,7 +50,8 @@ function TranscriptView({ transcript = "", isListening = false }) {
         return (
           <span 
             key={index} 
-            className="bg-amber-500/20 text-amber-300 font-bold border-b border-amber-400/60 px-1 rounded transition-all hover:bg-amber-400/30"
+            className="bg-rose-500/20 text-rose-300 font-extrabold border-b border-rose-500/80 px-1.5 py-0.5 rounded transition-all hover:bg-rose-500/35 hover:shadow-[0_0_8px_rgba(239,68,68,0.3)] select-all"
+            title="SCAM SIGNAL FLAG"
           >
             {part}
           </span>
@@ -65,9 +66,9 @@ function TranscriptView({ transcript = "", isListening = false }) {
     if (!transcript) {
       return (
         <div className="flex flex-col items-center justify-center h-full text-gray-500 italic py-16">
-          <MessageSquare className="h-8 w-8 text-gray-600 mb-2" />
-          <p className="text-xs">No active call stream detected.</p>
-          <p className="text-[10px] text-gray-600 mt-1">Start a scenario or speak into the microphone to begin.</p>
+          <MessageSquare className="h-7 w-7 text-gray-600 mb-2" />
+          <p className="text-xs font-mono">NO ACTIVE VOICE DATALINK DETECTED</p>
+          <p className="text-[10px] text-gray-600 mt-1 font-mono">Dial a rehearsal scenario or stream microphone feed to compile transcripts.</p>
         </div>
       )
     }
@@ -78,34 +79,63 @@ function TranscriptView({ transcript = "", isListening = false }) {
     return sentences.map((sentence, idx) => {
       // Alternate speaker labels for demo simulation feel
       const isIncoming = idx % 2 === 0
-      const speakerLabel = isIncoming ? "INCOMING (SCAMMER)" : "TARGET USER"
+      const speakerLabel = isIncoming ? "INCOMING SOURCE (COERCION TARGET)" : "LOCAL USER (SECURED AGENT)"
+      
       const bubbleBg = isIncoming 
-        ? "bg-slate-800/40 border border-slate-700/30 text-gray-100" 
-        : "bg-indigo-950/20 border border-indigo-900/30 text-indigo-100 self-end ml-12"
+        ? "bg-slate-900/60 border border-rose-500/10 text-gray-200" 
+        : "bg-indigo-950/15 border border-indigo-500/10 text-indigo-100 self-end ml-12"
+
+      const AvatarIcon = isIncoming ? Skull : UserCheck
+      const iconColorClass = isIncoming ? "text-rose-400" : "text-indigo-400"
 
       return (
-        <div key={idx} className={`flex flex-col max-w-[85%] ${isIncoming ? 'self-start mr-12' : 'self-end'} mb-4`}>
-          <span className={`text-[10px] font-mono font-bold tracking-wider mb-1 px-1 ${
-            isIncoming ? 'text-rose-400' : 'text-indigo-400'
-          }`}>
-            {speakerLabel}
-          </span>
-          <div className={`p-3.5 rounded-2xl text-sm leading-relaxed ${bubbleBg}`}>
-            {highlightText(sentence)}
+        <div 
+          key={idx} 
+          className={`flex items-start max-w-[85%] ${isIncoming ? 'self-start mr-12' : 'self-end'} mb-4 animate-[fadeIn_0.3s_ease-out]`}
+        >
+          {/* Avatar Icon */}
+          {isIncoming && (
+            <div className="bg-rose-500/10 border border-rose-500/20 p-2 rounded-xl mr-2.5 flex-shrink-0">
+              <AvatarIcon className={`h-4.5 w-4.5 ${iconColorClass}`} />
+            </div>
+          )}
+
+          <div className="flex flex-col">
+            <span className={`text-[9px] font-mono font-black tracking-widest mb-1 px-1 flex items-center space-x-1 ${
+              isIncoming ? 'text-rose-400' : 'text-indigo-400'
+            }`}>
+              <span>{speakerLabel}</span>
+              {isIncoming && <span className="h-1.5 w-1.5 bg-rose-500 rounded-full animate-ping"></span>}
+            </span>
+            <div className={`p-3 rounded-2xl text-xs leading-relaxed ${bubbleBg}`}>
+              {highlightText(sentence)}
+            </div>
           </div>
+
+          {/* User side avatar */}
+          {!isIncoming && (
+            <div className="bg-indigo-500/10 border border-indigo-500/20 p-2 rounded-xl ml-2.5 flex-shrink-0 self-end">
+              <AvatarIcon className={`h-4.5 w-4.5 ${iconColorClass}`} />
+            </div>
+          )}
         </div>
       )
     })
   }
 
   return (
-    <div className="glass-panel rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
-      <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-4">
-        <span className="text-xs font-bold font-mono text-indigo-400 tracking-widest uppercase">REAL-TIME CALL TRANSCRIPT</span>
+    <div className="glass-panel rounded-2xl p-5 flex flex-col h-full relative overflow-hidden">
+      <div className="tech-corner-tr opacity-25"></div>
+      
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-4">
+        <div className="flex items-center space-x-2">
+          <Terminal className="h-4.5 w-4.5 text-indigo-400" />
+          <span className="text-xs font-black font-mono text-indigo-400 tracking-wider uppercase">REAL-TIME STREAM DECODING</span>
+        </div>
         {isListening && (
-          <div className="flex items-center space-x-1.5 text-xs text-red-400 font-mono font-bold">
-            <span className="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
-            <span>LIVE INTERCEPT</span>
+          <div className="flex items-center space-x-1.5 text-[9px] text-rose-500 font-mono font-bold uppercase">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-ping"></span>
+            <span>ACTIVE SIGNAL CAPTURE</span>
           </div>
         )}
       </div>
@@ -113,22 +143,27 @@ function TranscriptView({ transcript = "", isListening = false }) {
       {/* Transcript container */}
       <div 
         ref={containerRef}
-        className="flex-1 overflow-y-auto flex flex-col pr-1 min-h-[300px] max-h-[480px]"
+        className="flex-1 overflow-y-auto flex flex-col pr-1 min-h-[280px] max-h-[460px] scrollbar-thin"
       >
         {renderTurns()}
         
         {/* Rolling Transcription loading state */}
         {isListening && (
-          <div className="flex flex-col max-w-[80%] self-start mt-2">
-            <span className="text-[10px] font-mono font-bold text-gray-500 tracking-wider mb-1 px-1">
-              INCOMING VOICE
-            </span>
-            <div className="bg-slate-800/20 border border-white/5 p-3 rounded-2xl flex items-center space-x-2">
-              <span className="text-xs text-gray-400">Capturing audio stream</span>
-              <div className="flex space-x-1">
-                <span className="h-1.5 w-1.5 bg-indigo-400 rounded-full typing-dot"></span>
-                <span className="h-1.5 w-1.5 bg-indigo-400 rounded-full typing-dot"></span>
-                <span className="h-1.5 w-1.5 bg-indigo-400 rounded-full typing-dot"></span>
+          <div className="flex items-start max-w-[80%] self-start mt-2">
+            <div className="bg-rose-500/5 border border-rose-500/10 p-2 rounded-xl mr-2.5 flex-shrink-0">
+              <Skull className="h-4.5 w-4.5 text-rose-500/40 animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[9px] font-mono font-bold text-gray-500 tracking-widest mb-1 px-1">
+                STREAM DECOMPOSING...
+              </span>
+              <div className="bg-slate-900/30 border border-white/5 px-3 py-2 rounded-2xl flex items-center space-x-2">
+                <span className="text-[10px] text-gray-400 font-mono">Awaiting speech patterns</span>
+                <div className="flex space-x-1">
+                  <span className="h-1.5 w-1.5 bg-rose-500/50 rounded-full typing-dot"></span>
+                  <span className="h-1.5 w-1.5 bg-rose-500/50 rounded-full typing-dot"></span>
+                  <span className="h-1.5 w-1.5 bg-rose-500/50 rounded-full typing-dot"></span>
+                </div>
               </div>
             </div>
           </div>
