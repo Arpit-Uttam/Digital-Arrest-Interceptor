@@ -4,14 +4,15 @@
 
 @layer base {
   body {
-    background-color: #07080d;
+    background-color: #06070a;
     background-image: 
-      radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.04) 0%, transparent 40%),
-      linear-gradient(rgba(255, 255, 255, 0.003) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.03) 0%, transparent 45%),
+      linear-gradient(rgba(255, 255, 255, 0.002) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.002) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
     font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
   }
   
   code {
@@ -21,59 +22,122 @@
 
 /* Glassmorphism Panel styles */
 .glass-panel {
-  background: rgba(17, 20, 34, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(10, 12, 22, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel-glow-red {
-  background: rgba(28, 14, 18, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.15);
+  background: rgba(26, 11, 14, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.2);
 }
 
-/* Glow indicators */
+/* Neon Glow classes */
 .neon-glow-indigo {
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
 }
-
 .neon-glow-red {
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.35);
 }
-
 .neon-glow-yellow {
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
 }
-
 .neon-glow-green {
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
 }
 
-/* Custom Scrollbar for Transcripts */
+/* Cybernetic scanline simulation overlay */
+.scanlines-overlay::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 10;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Animated border accents */
+.border-gradient-active {
+  position: relative;
+}
+
+.border-gradient-active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(99,102,241,0.5), transparent, rgba(239,68,68,0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Cyber panel tech elements */
+.tech-dot {
+  width: 4px;
+  height: 4px;
+  background-color: #6366f1;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #6366f1;
+}
+
+.tech-corner-tr {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tech-corner-bl {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(10, 11, 16, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.05);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(99, 102, 241, 0.35);
 }
 
-/* Typing pulse indicator */
+/* Typing / Voice processing animations */
 .typing-dot {
   animation: typing 1.4s infinite both;
 }
@@ -99,4 +163,44 @@
     opacity: .2;
     transform: scale(0.8);
   }
+}
+
+/* Card highlight animations */
+.card-scale {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-scale:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Matrix scanning line */
+.scan-line-animation {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.8), transparent);
+  animation: scanning 2.5s ease-in-out infinite;
+  position: absolute;
+}
+
+@keyframes scanning {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Glitch animation for critical safety warning text */
+.glitch-text {
+  animation: textGlitch 0.4s infinite;
+}
+
+@keyframes textGlitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-1px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(1px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
 }
