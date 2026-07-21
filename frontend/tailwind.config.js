@@ -8,9 +8,9 @@ export default {
     extend: {
       colors: {
         cyber: {
-          bg: '#0a0b10',       // Deep cyber void
-          card: 'rgba(17, 19, 31, 0.75)', // Glass container
-          border: 'rgba(255, 255, 255, 0.08)',
+          bg: '#08090d',       // Deep cyber black
+          card: 'rgba(13, 15, 24, 0.75)', // Glass container
+          border: 'rgba(255, 255, 255, 0.06)',
           neonGreen: '#10b981', // Clean safety
           neonYellow: '#f59e0b',// Warning caution
           neonRed: '#ef4444',   // Threat breach
@@ -25,9 +25,14 @@ export default {
         'glow-indigo': '0 0 20px rgba(99, 102, 241, 0.3)'
       },
       animation: {
-        'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'glow': 'cyber-glow 2s ease-in-out infinite alternate',
         'wave': 'wave-animation 1.5s ease-in-out infinite',
+        'bounce-short': 'bounce-short 1.5s ease-in-out infinite',
+        'radar-sweep': 'radar-sweep 4s linear infinite',
+        'scanline': 'scanline 10s linear infinite',
+        'shimmer': 'shimmer 2.5s linear infinite',
+        'text-glitch': 'text-glitch 3s linear infinite'
       },
       keyframes: {
         'cyber-glow': {
@@ -37,6 +42,28 @@ export default {
         'wave-animation': {
           '0%, 100%': { transform: 'scaleY(0.3)' },
           '50%': { transform: 'scaleY(1.0)' }
+        },
+        'bounce-short': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-4px)' }
+        },
+        'radar-sweep': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+        'scanline': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' }
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' }
+        },
+        'text-glitch': {
+          '0%, 100%': { textShadow: '2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,0,255,0.5)' },
+          '25%': { textShadow: '-2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,0,255,0.5)' },
+          '50%': { textShadow: '2px -2px 0 rgba(255,0,0,0.5), -2px 2px 0 rgba(0,0,255,0.5)' },
+          '75%': { textShadow: '-2px 2px 0 rgba(255,0,0,0.5), 2px -2px 0 rgba(0,0,255,0.5)' }
         }
       }
     },
